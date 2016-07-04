@@ -22,7 +22,7 @@ RUN rm -rf /var/www/* \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
 
-RUN service apache2 stop && update-rc.d -f  apache2 remove
+RUN service apache2 stop && update-rc.d -f  apache2 remove && rm -f /var/run/apache2/apache2.pid
 
 # Add main start script for when image launches
 ADD run.sh /run.sh
