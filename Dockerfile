@@ -18,8 +18,9 @@ RUN sed -i "s/;date.timezone =/date.timezone = UTC/" /etc/php5/cli/php.ini \
 
 # Configure Apache
 RUN rm -rf /var/www/* \
-    && a2enmod rewrite headers \
+    && a2enmod rewrite headers proxy expires \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
 
 RUN service apache2 stop && update-rc.d -f  apache2 remove && rm -f /var/run/apache2/apache2.pid
